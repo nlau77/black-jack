@@ -1,3 +1,4 @@
+require 'pry'
 class Card
   # attr_accessor :get_card_value
   attr_reader :card
@@ -5,11 +6,25 @@ class Card
     @card = card
   end
 
+
+  def ace?
+    @card.include?('A')
+
+  end
+
+  def face?
+    ['J', 'Q', 'K'].include?(card[0])
+  end
+
+  def num_card?
+    !ace? && !face?
+  end
+
   def get_card_value
-    # find the value of the cards if its a J,Q,K or A
-    if @card.include?('A')
+
+    if ace?
       return 11
-    elsif @card.include?('10') || @card.include?('J') || @card.include?('Q') || @card.include?('K')
+    elsif @card.include?('10') || face?
       return 10
     else
       return @card[0].to_i
